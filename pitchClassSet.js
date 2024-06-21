@@ -27,32 +27,43 @@ function operate(pcSet, operation) {
 
   let array = [];
 
+  // separando cada caracterio de "operation" e colocando em um array
   for (let c = 0; c < operation.length; c++) {
     array.push(operation[c]);
   }
 
+  // verificando se o caracterio "I" esta dentro do array
   let operacacao = array.includes("I");
 
+  // verificando se os valores dentro do "array" são numero (false) ou se não são(true)
   let number = array.map((value) => {
+    //se for numero retorna o valor numerico pra variavel, se não for retorna "undefined"
     if (!isNaN(value)) {
       return value;
     }
   });
 
+  // verificando se a valores indefinidos, se tiver sera removido
   number.map((value, index) => {
     if (typeof value === "undefined") {
       number.splice(index, 1);
     }
   });
 
+  // se houver dos caracterios numericos no array ele serão concatenados e depois serão passado para o tipo inteiro
+  // após serem concatenas e transformadas em numeros, os caracterios restantes serão removidos do array
   if (number.length >= 2) {
     number.unshift(parseInt(number[0] + number[1]));
     number.splice(1);
   } else {
+    // transforma o que tiver em numero e remove o que estava em string
     number.unshift(parseInt(number[0]));
     number.splice(1);
   }
 
+  // verifica se tem "I" na operação, se tiver, vai pegar todos os valores passados em um array
+  // efetuar um calculo para verificar se o resultado é maior que 11, se for vai tirar o modulo desse resultado
+  // por 12 e retornar o resultado, se não for vai apenas executar o calculo e retornar o resultado
   if (operacacao) {
     result = pcSet.map((value) => {
       if (12 - value + number[0] > 11) {
@@ -61,8 +72,12 @@ function operate(pcSet, operation) {
         return 12 - value + number[0];
       }
     });
+    //colocara em ordem crescente
     result.sort((a, b) => a - b);
   } else {
+    // se não tiver "I" na operação, vai passar em cada valor do array passado
+    // verifica se a soma dele com o valor passado na operação não é maior que 11, se for subtrai 12
+    // se não apenas calcula e retorna resultado
     result = pcSet.map((value) => {
       if (value + parseInt(number[0]) > 11) {
         return value + parseInt(number[0]) - 12;
@@ -70,6 +85,7 @@ function operate(pcSet, operation) {
         return value + parseInt(number[0]);
       }
     });
+    // coloca o array result em ordem numerica
     result.sort((a, b) => a - b);
   }
 

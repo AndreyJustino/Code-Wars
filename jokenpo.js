@@ -20,7 +20,8 @@
 
 function rpsls(pl1, pl2) {
   //Your Magnificent Code here
-
+    // condições que verificaram se de acordo com a jogada do player2 o player 1 ganha
+    // ou se de acordo com as jogadas do player1 o player2 ganha, se não da empate 
   if (pl1 == "rock" && (pl2 == "scissors" || pl2 == "lizard")) {
     return "Player 1 Won!";
   } else if (pl1 == "lizard" && (pl2 == "paper" || pl2 == "spock")) {

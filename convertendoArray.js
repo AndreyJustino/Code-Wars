@@ -11,6 +11,7 @@
 // Note that you can receive floats as well.
 
 function toNumberArray(stringarray) {
+  // pega cada valor do array passado e convente em numerico
   let arrayNew = stringarray.map((value) => {
     return Number(value);
   });
